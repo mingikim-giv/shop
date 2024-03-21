@@ -1,8 +1,6 @@
 package shop;
 
 public class User {
-	public final String ADMIN = "admin";
-	public final String ADMIN_PW = "1234";
 	private Cart cart;
 	private String id, pw;
 	
