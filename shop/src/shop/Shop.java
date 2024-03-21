@@ -1,6 +1,5 @@
 package shop;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Shop {
@@ -52,7 +51,7 @@ public class Shop {
 		}
 		else if(sel == SHOP) {
 			
-		}
+		}	
 		else if(sel == MY_PAGE) {
 			
 		}
@@ -76,7 +75,7 @@ public class Shop {
 		else {
 			String pw = inputString("PW");
 			usermanager.addUser(id, pw);
-			System.out.println("회원 가입 완료!");
+			System.out.println("회원 가입 완료");
 		}
 	}
 	
@@ -85,6 +84,15 @@ public class Shop {
 		String id = inputString("ID");
 		String pw = inputString("PW");
 		
+		User user = new User(id, pw);
+		if(id.equals(user.getId()) && pw.equals(user.getPw())) {
+			log = usermanager.searchId(id);
+			System.out.println("로그인 완료");
+		}
+		
+		if(log == -1) {
+			System.err.println("회원 정보를 다시 입력해주세요.");
+		}
 	}
 	// input
 	private int inputNumber(String message) {
