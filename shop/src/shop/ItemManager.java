@@ -6,6 +6,10 @@ public class ItemManager {
 	private static ArrayList<Item> list;
 	private static ItemManager instance = new ItemManager();
 	
+	public ItemManager() {
+		list = new ArrayList<>();
+	}
+	
 	public static ItemManager getInstance() {
 		return instance;
 	}
