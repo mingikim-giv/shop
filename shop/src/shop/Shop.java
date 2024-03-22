@@ -53,7 +53,7 @@ public class Shop {
 			join();
 		}
 		else if(sel == LEAVE && isLogin()) {
-			
+			leave();
 		}
 		else if(sel == LOGIN && !isLogin()) {
 			login();
@@ -107,6 +107,19 @@ public class Shop {
 		}
 	}
 	
+	// leave
+	private void leave() {
+		if(log == 0) {
+			System.err.println("관리사측 문의해주세요.");
+			return;
+		}
+		
+		String pw = inputString("PW");
+		if(userManager.getUser(log).getPw().equals(pw)) {
+			System.out.println("회원 탈퇴 완료");
+			log = -1;
+		}
+	}
 	// login
 	private void login() {
 		String id = inputString("ID");
