@@ -7,6 +7,7 @@ public class User {
 	public User(String id, String pw) {
 		this.id = id;
 		this.pw = pw;
+		this.cart = new Cart(this.id);
 	}
 	
 	public String getId() {
