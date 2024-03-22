@@ -25,6 +25,14 @@ public class ItemManager {
 		return false;
 	}
 	
+	// printItem
+	public void printItem() {
+		for(int i = 0; i < list.size(); i ++) {
+			Item item = list.get(i);
+			System.out.printf("%s: %d원\n", item.getName(), item.getPrice());
+		}
+	}
+	
 	// C.
 	public void addItem(String name, int price) {
 		if(searchItem(name)) {
