@@ -57,6 +57,6 @@ public class ItemManager {
 	}
 	// size
 	public int size() {
-		return size();
+		return list.size();
 	}
 }
