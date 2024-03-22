@@ -17,6 +17,10 @@ public class User {
 		return this.pw;
 	}
 	
+	public Cart getCart() {
+		return this.cart;
+	}
+	
 	public User clone() {
 		User user = new User(this.id, this.pw);
 		return user;
