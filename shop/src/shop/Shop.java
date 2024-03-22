@@ -1,10 +1,14 @@
 package shop;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Shop {
 	private Scanner scan = new Scanner(System.in);
-	private UserManager usermanager = new UserManager();
+	private UserManager userManager = new UserManager();
+	private ItemManager itemManager = new ItemManager();
+	
+	private static ArrayList<User> list = new ArrayList<>();
 	
 	private final int JOIN = 1;
 	private final int LEAVE = 2;
@@ -15,7 +19,7 @@ public class Shop {
 	private final int FILE = 7;
 	private final int ADMIN = 8;
 	
-	private int log = -1;
+	public static int log = -1;
 	private String brand;
 
 	public Shop(String brand) {
@@ -24,6 +28,7 @@ public class Shop {
 	
 	// print
 	private void print() {
+		userManager.printUserId();	// 검수용
 		System.out.println("===" + brand + "===");
 		System.out.println("[1]회원가입");
 		System.out.println("[2]회원탈퇴");
@@ -46,8 +51,7 @@ public class Shop {
 			login();
 		}
 		else if(sel == LOGOUT) {
-			log = -1;
-			System.out.println("로그아웃 완료");
+			logout();
 		}
 		else if(sel == SHOP) {
 			
@@ -66,7 +70,7 @@ public class Shop {
 	// join
 	private void join() {
 		String id = inputString("ID");
-		int check = usermanager.searchId(id);
+		int check = userManager.searchId(id);
 		
 		if(check != -1) {
 			System.err.println("중복된 아이디입니다.");
@@ -74,7 +78,7 @@ public class Shop {
 		}
 		else {
 			String pw = inputString("PW");
-			usermanager.addUser(id, pw);
+			userManager.addUser(id, pw);
 			System.out.println("회원 가입 완료");
 		}
 	}
@@ -82,18 +86,27 @@ public class Shop {
 	// login
 	private void login() {
 		String id = inputString("ID");
-		String pw = inputString("PW");
+		int idx = userManager.searchId(id);
 		
-		User user = new User(id, pw);
-		if(id.equals(user.getId()) && pw.equals(user.getPw())) {
-			log = usermanager.searchId(id);
-			System.out.println("로그인 완료");
+		if(idx == -1) {
+			System.err.println("회원 정보를 다시 입력해주세요.");
+			return;
 		}
 		
-		if(log == -1) {
-			System.err.println("회원 정보를 다시 입력해주세요.");
+		String pw = inputString("PW");
+		User user = userManager.getUser(idx);
+		if(pw.equals(user.getPw())) {
+			log = idx;
+			System.out.println("로그인 성공");
 		}
 	}
+	
+	// logout
+	private void logout() {
+		log = -1;
+		System.out.println("로그아웃 완료");
+	}
+	
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
