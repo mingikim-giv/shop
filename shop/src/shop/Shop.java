@@ -1,14 +1,11 @@
 package shop;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Shop {
 	private Scanner scan = new Scanner(System.in);
 	private UserManager userManager = new UserManager();
 	private ItemManager itemManager = new ItemManager();
-	
-	private static ArrayList<User> list = new ArrayList<>();
 	
 	private final int JOIN = 1;
 	private final int LEAVE = 2;
@@ -39,6 +36,7 @@ public class Shop {
 	// print
 	private void print() {
 		userManager.printUserId();	// 검수용
+		itemManager.printItem();	// 검수용
 		System.out.println("===" + brand + "===");
 		System.out.println("[1]회원가입");
 		System.out.println("[2]회원탈퇴");
@@ -171,7 +169,7 @@ public class Shop {
 			itemEnroll();
 		}
 		else if(sel == ITEM_DELETE) {
-			
+			deleteItem();
 		}
 		else if(sel == ITEM_CHANGE) {
 			
@@ -183,7 +181,29 @@ public class Shop {
 	
 	// itemEnroll
 	private void itemEnroll() {
+		String name = inputString("아이템명");
+		int price = inputNumber("아이템 가격");
 		
+		itemManager.addItem(name, price);
+	}
+	
+	// printItem
+	private void printItem() {
+		for(int i = 0; i < itemManager.size(); i ++) {
+			System.out.printf("%d)%s\n", i+1, itemManager.getItem(i));
+		}
+	}
+	
+	// deleteItem
+	private void deleteItem() {
+		printItem();
+		int idx = inputNumber("삭제할 번호")-1;
+		
+		if(idx < 0 || idx >= itemManager.size()) {
+			return;
+		}
+		
+		itemManager.removeItem(idx);
 	}
 	
 	// input
@@ -209,7 +229,7 @@ public class Shop {
 	public void run() {
 		while(true) {
 			print();
-			runMenu(inputNumber("menu"));
+			runMenu(inputNumber("메뉴 선택"));
 		}
 	}
 }
