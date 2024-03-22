@@ -57,13 +57,13 @@ public class Shop {
 			
 		}	
 		else if(sel == MY_PAGE) {
-			
+			myPageSubMenu();
 		}
 		else if(sel == FILE) {
 			
 		}
 		else if(sel == ADMIN) {
-			
+			adminSubMenu();
 		}
 	}
 	
@@ -105,6 +105,22 @@ public class Shop {
 	private void logout() {
 		log = -1;
 		System.out.println("로그아웃 완료");
+	}
+	
+	// myPageSubMenu
+	private void myPageSubMenu() {
+		System.out.println("[1]장바구니");
+		System.out.println("[2]항목 삭제");
+		System.out.println("[3]수량 수정");
+		System.out.println("[4]결제");
+	}
+	
+	// adminSubMenu
+	private void adminSubMenu() {
+		System.out.println("[1]아이템 등록");
+		System.out.println("[2]아이템 삭제");
+		System.out.println("[3]아이템 수정");
+		System.out.println("[4]총매출 조회");
 	}
 	
 	// input
