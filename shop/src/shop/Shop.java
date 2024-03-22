@@ -156,6 +156,7 @@ public class Shop {
 			return;
 		}
 		
+		int itemNum = inputNumber("아이템 수량");
 		Item item = itemManager.getItem(number);
 		userManager.addItem(log, item);
 		System.out.println("쇼핑 완료");
@@ -249,6 +250,11 @@ public class Shop {
 		
 		String name = inputString("수정할 아이템 이름");
 		int price = inputNumber("수정할 가격");
+		
+		if(price < 0) {
+			System.err.println("수정할 가격은 0보다 큰 수 입니다.");
+			return;
+		}
 		
 		if(itemManager.searchItem(name)) {
 			System.err.println("이미 존재하는 아이템입니다.");
