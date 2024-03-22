@@ -47,6 +47,10 @@ public class ItemManager {
 		Item item = list.get(idx);
 		return item.clone();
 	}
+	// U.
+	public Item updateItem(int idx, Item item) {
+		return list.set(idx, item);
+	}
 	// D.
 	public void removeItem(int idx) {
 		if(idx < 0 || idx >= list.size()) {
