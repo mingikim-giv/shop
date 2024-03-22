@@ -20,7 +20,7 @@ public class UserManager {
 	public int searchId(String id) {
 		for(int i = 0; i < list.size(); i ++) {
 			User user = list.get(i);
-			if(id.equals(user.getId())) {
+			if(user.getId().equals(id)) {
 				return i;
 			}
 		}
@@ -33,6 +33,12 @@ public class UserManager {
 			User user = list.get(i);
 			System.out.printf("%s/%s\n", user.getId(), user.getPw());
 		}
+	}
+	
+	// addItem
+	public void addItem(int idx, Item item) {
+		User user = getUser(idx);
+		user.getCart().addItem(item);
 	}
 	
 	// C.
