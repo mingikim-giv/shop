@@ -55,5 +55,8 @@ public class ItemManager {
 		}
 		list.remove(idx);
 	}
-	
+	// size
+	public int size() {
+		return size();
+	}
 }
