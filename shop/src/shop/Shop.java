@@ -27,6 +27,8 @@ public class Shop {
 	private final int SALES_VIEW = 4;
 	
 	private int log;
+	private int sale;
+	
 	private String brand;
 
 	public Shop(String brand) {
@@ -170,7 +172,7 @@ public class Shop {
 	// myPageRunMenu
 	private void myPageRunMenu(int sel) {
 		if(sel == MYBASKET) {
-			
+			myBasket();
 		}
 		else if(sel == DELETE) {
 			
@@ -182,6 +184,12 @@ public class Shop {
 			
 		}
 	}
+	
+	// myBasket
+	private void myBasket() {
+		
+	}
+	
 	// adminSubMenu
 	private void adminSubMenu() {
 		System.out.println("[1]아이템 등록");
@@ -202,7 +210,7 @@ public class Shop {
 			changeItem();
 		}
 		else if(sel == SALES_VIEW) {
-			
+			viewSale();
 		}
 	}
 	
@@ -252,6 +260,10 @@ public class Shop {
 		System.out.println("수정 완료");
 	}
 	
+	// viewSale
+	private void viewSale() {
+		System.out.printf("총 매출액: %d원", sale);
+	}
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
