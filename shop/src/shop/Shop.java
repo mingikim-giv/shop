@@ -19,6 +19,16 @@ public class Shop {
 	private final int FILE = 7;
 	private final int ADMIN = 8;
 	
+	private final int MYBASKET = 1;
+	private final int DELETE = 2;
+	private final int ITEM_COUNT_CHANGE = 3;
+	private final int PAYMENT = 4;
+	
+	private final int ITEM_ENROLL = 1;
+	private final int ITEM_DELETE = 2;
+	private final int ITEM_CHANGE = 3;
+	private final int SALES_VIEW = 4;
+	
 	public static int log = -1;
 	private String brand;
 
@@ -41,30 +51,46 @@ public class Shop {
 	}
 	// runMenu
 	private void runMenu(int sel) {
-		if(sel == JOIN) {
+		if(sel == JOIN && !isLogin()) {
 			join();
 		}
-		else if(sel == LEAVE) {
+		else if(sel == LEAVE && isLogin()) {
 			
 		}
-		else if(sel == LOGIN) {
+		else if(sel == LOGIN && !isLogin()) {
 			login();
 		}
 		else if(sel == LOGOUT) {
 			logout();
 		}
-		else if(sel == SHOP) {
+		else if(sel == SHOP && isLogin()) {
 			
 		}	
-		else if(sel == MY_PAGE) {
+		else if(sel == MY_PAGE && isLogin()) {
 			myPageSubMenu();
+			myPageRunMenu(inputNumber("메뉴"));
 		}
 		else if(sel == FILE) {
 			
 		}
-		else if(sel == ADMIN) {
+		else if(sel == ADMIN && checkAdmin()) {
 			adminSubMenu();
+			adminRunMenu(inputNumber("메뉴"));
 		}
+	}
+	
+	// isLogin
+	private boolean isLogin() {
+		return log == -1 ? false : true;
+	}
+	
+	// checkAdmin
+	private boolean checkAdmin() {
+		if(log != 0) {
+			System.err.println("관리자만 이용 가능합니다.");
+			return false;
+		}
+		return true;
 	}
 	
 	// join
@@ -115,12 +141,49 @@ public class Shop {
 		System.out.println("[4]결제");
 	}
 	
+
+	// myPageRunMenu
+	private void myPageRunMenu(int sel) {
+		if(sel == MYBASKET) {
+			
+		}
+		else if(sel == DELETE) {
+			
+		}
+		else if(sel == ITEM_COUNT_CHANGE) {
+			
+		}
+		else if(sel == PAYMENT) {
+			
+		}
+	}
 	// adminSubMenu
 	private void adminSubMenu() {
 		System.out.println("[1]아이템 등록");
 		System.out.println("[2]아이템 삭제");
 		System.out.println("[3]아이템 수정");
 		System.out.println("[4]총매출 조회");
+	}
+
+	// adminRunMenu
+	private void adminRunMenu(int sel) {
+		if(sel == ITEM_ENROLL) {
+			itemEnroll();
+		}
+		else if(sel == ITEM_DELETE) {
+			
+		}
+		else if(sel == ITEM_CHANGE) {
+			
+		}
+		else if(sel == SALES_VIEW) {
+			
+		}
+	}
+	
+	// itemEnroll
+	private void itemEnroll() {
+		
 	}
 	
 	// input
