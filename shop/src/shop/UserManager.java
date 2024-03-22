@@ -51,6 +51,10 @@ public class UserManager {
 		User user = list.get(idx);
 		return user.clone();
 	}
+	// U.
+	public User updateUser(int idx, User user) {
+		return list.set(idx, user);
+	}
 	// D.
 	public void removeUser(int idx) {
 		if(idx < 0 || idx >= list.size()) {
