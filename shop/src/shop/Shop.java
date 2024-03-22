@@ -172,7 +172,7 @@ public class Shop {
 			deleteItem();
 		}
 		else if(sel == ITEM_CHANGE) {
-			
+			changeItem();
 		}
 		else if(sel == SALES_VIEW) {
 			
@@ -206,6 +206,23 @@ public class Shop {
 		itemManager.removeItem(idx);
 	}
 	
+	// changeItem
+	private void changeItem() {
+		printItem();
+		int idx = inputNumber("수정할 아이템 번호")-1;
+		
+		String name = inputString("수정할 아이템 이름");
+		int price = inputNumber("수정할 가격");
+		
+		if(itemManager.searchItem(name)) {
+			System.err.println("이미 존재하는 아이템입니다.");
+			return;
+		}
+		
+		Item item = new Item(name, price);
+		itemManager.updateItem(idx, item);
+		System.out.println("수정 완료");
+	}
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
