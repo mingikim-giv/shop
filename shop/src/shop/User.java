@@ -26,9 +26,6 @@ public class User {
 		return cart.cartSize() == 0;
 	}
 	
-	public void addItem(Item item) {
-		cart.addItem(item);
-	}
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
