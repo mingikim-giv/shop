@@ -7,7 +7,7 @@ public class User {
 	public User(String id, String pw) {
 		this.id = id;
 		this.pw = pw;
-		this.cart = new Cart(this.id);
+		this.cart = new Cart();
 	}
 	
 	public String getId() {
@@ -20,6 +20,10 @@ public class User {
 	
 	public Cart getCart() {
 		return this.cart;
+	}
+	
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 	
 	public User clone() {
