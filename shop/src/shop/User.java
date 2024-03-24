@@ -22,6 +22,9 @@ public class User {
 		return this.cart;
 	}
 	
+	public void addItem(Item item) {
+		cart.addItem(item);
+	}
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
