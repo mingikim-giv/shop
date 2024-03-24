@@ -46,6 +46,7 @@ public class Shop {
 	public Shop(String brand) {
 		this.brand = brand;
 		log = -1;
+		load();
 	}
 	
 	// print
@@ -177,7 +178,7 @@ public class Shop {
 		int cnt = inputNumber("구매할 수량");
 		
 		if(cnt < 1) {
-			System.err.println("1개 이상 부터 변경 가능합니다.");
+			System.err.println("1개 이상부터 변경 가능합니다.");
 			return;
 		}
 		
@@ -399,14 +400,69 @@ public class Shop {
 				for(int j = 0; j < cart.cartSize(); j ++) {
 					data += "/";
 					String name = cart.getCart(j).getName();
-					int price = cart.getCart(j).getPrice();
-					data += name + "/" + price;
+					int cnt = cart.getCart(j).getCnt();
+					data += name + "/" + cnt;
 				}
 			}
 			data += "\n";
 		}
 		data += sale;
 		return data;
+	}
+	
+	// load
+	private void load() {
+		if(file.exists()) {
+			String data = "";
+			try {
+				fr = new FileReader(file);
+				br = new BufferedReader(fr);
+				
+				while(br.ready()) {
+					data += br.readLine() + "\n";
+				}
+				
+				br.close();
+				fr.close();
+				
+				loadData(data);
+				System.out.println("파일 로드 성공");
+			} catch (Exception e) {
+				System.out.println("파일 로드 실패");
+			}
+		}
+	}
+	
+	// loadData
+	private void loadData(String data) {
+		String[] lines = data.split("\n");
+		
+		// item
+		String[] item = lines[0].split("/");
+		for(int i = 0; i < item.length; i ++) {
+			
+			String name = item[0];
+			int price = Integer.parseInt(item[1]);
+			
+			itemManager.addItem(name, price);
+		}
+		
+		// user
+		for(int i = 1; i < lines.length-1; i ++) {
+			String[] info = lines[i].split("/");
+			
+			String id = info[0];
+			String pw = info[1];
+			userManager.addUser(id, pw);
+			
+			if(info.length > 2) {
+				String name  = info[2];
+				int cnt = Integer.parseInt(info[3]);
+				userManager.getUser(i).getCart().addItem(name, cnt);
+			}
+			
+		}
+		sale = Integer.parseInt(lines[lines.length-1]);
 	}
 	
 	// input
