@@ -22,6 +22,10 @@ public class User {
 		return this.cart;
 	}
 	
+	public boolean isCartEmpty() {
+		return cart.cartSize() == 0;
+	}
+	
 	public void addItem(Item item) {
 		cart.addItem(item);
 	}
