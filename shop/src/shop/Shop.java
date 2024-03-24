@@ -178,7 +178,7 @@ public class Shop {
 			myBasket();
 		}
 		else if(sel == DELETE) {
-			
+			delete();
 		}
 		else if(sel == ITEM_COUNT_CHANGE) {
 			
@@ -196,9 +196,22 @@ public class Shop {
 			System.err.println("장바구니가 비었습니다.");
 			return;
 		}
-		System.out.println(user.getCart());
+		user.getCart().printCart();
 	}
 	
+	// delete
+	private void delete() {
+		myBasket();
+		int number = inputNumber("아이템 번호")-1;
+		
+		if(number < 0 || number >= itemManager.size()) {
+			System.err.println("번호를 다시 입력해주세요.");
+			return;
+		}
+		User user = userManager.getUser(log);
+		user.getCart().removeCart(number);
+		System.out.println("항목 삭제 완료");
+	}
 	// adminSubMenu
 	private void adminSubMenu() {
 		System.out.println("[1]아이템 등록");
