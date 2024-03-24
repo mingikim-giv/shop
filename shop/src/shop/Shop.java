@@ -118,6 +118,7 @@ public class Shop {
 		
 		String pw = inputString("PW");
 		if(userManager.getUser(log).getPw().equals(pw)) {
+			userManager.removeUser(log);
 			log = -1;
 			System.out.println("회원 탈퇴 완료");
 		}
@@ -189,7 +190,13 @@ public class Shop {
 	
 	// myBasket
 	private void myBasket() {
+		User user = userManager.getUser(log);
 		
+		if(user.isCartEmpty()) {
+			System.err.println("장바구니가 비었습니다.");
+			return;
+		}
+		System.out.println(user.getCart());
 	}
 	
 	// adminSubMenu
