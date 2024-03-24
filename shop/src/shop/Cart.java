@@ -48,8 +48,20 @@ public class Cart {
 		return total;
 	}
 	// C.
-	public void addItem(Item item) {
-		list.add(item);
+	public void addItem(String name, int cnt) {
+		int idx = searchItemName(name);
+		
+		if(idx == -1) {
+			Item item = new Item();
+			item.setName(name);
+			item.setCnt(cnt);
+			
+			list.add(item);
+			return;
+		}
+		int piece = list.get(idx).getCnt();
+		list.get(idx).setCnt(cnt+piece);
+		return;
 	}
 	// R.
 	public Item getItem(int idx) {
@@ -66,8 +78,10 @@ public class Cart {
 		}
 		list.get(idx).setPrice(price);
 	}
-	// D.
-	public void removeCart(int idx) {
+	// R.
+	public void removeItem(String name) {
+		int idx = searchItemName(name);
+		
 		if(idx < 0 || idx >= list.size()) {
 			System.err.println("유효하지 않은 범위입니다.");
 			return;
