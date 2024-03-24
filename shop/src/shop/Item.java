@@ -2,8 +2,7 @@ package shop;
 
 public class Item {
 	private String name;
-	private int price;
-	private int cnt;
+	private int price, cnt, total;
 	
 	public Item() {
 		
@@ -26,6 +25,10 @@ public class Item {
 		return this.cnt;
 	}
 	
+	public int getTotal() {
+		return this.total;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -36,6 +39,10 @@ public class Item {
 	
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
+	}
+	
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 	public Item clone() {
