@@ -27,7 +27,7 @@ public class Cart {
 		}
 		for(int i = 0; i < list.size(); i ++) {
 			Item item = list.get(i);
-			System.out.printf("%d) %s(%s개)\n", i+1, item.getName(), item.getPrice()); 
+			System.out.printf("%d) %s(%s원)\n", i+1, item.getName(), item.getPrice()); 
 		}
 		int total = total();
 		System.out.printf("총 금액: %d원\n", total);
@@ -57,8 +57,14 @@ public class Cart {
 		return item.clone();
 	}
 	// U.
-	public Item setItem(int idx, Item item) {
-		return list.set(idx, item);
+	public void setCart(String name, int price) {
+		int idx = searchItemName(name);
+		
+		if(idx < 0 || idx >= list.size()) {
+			System.err.println("존재하지 않는 상품입니다.");
+			return;
+		}
+		list.get(idx).setPrice(price);
 	}
 	// D.
 	public void removeCart(int idx) {
