@@ -35,12 +35,6 @@ public class UserManager {
 		}
 	}
 	
-	// addItem
-	public void addItem(int idx, Item item) {
-		User user = getUser(idx);
-		user.getCart().addItem(item);
-	}
-	
 	// C.
 	public void addUser(String id, String pw) {
 		User user = new User(id ,pw);
