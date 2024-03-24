@@ -1,5 +1,9 @@
 package shop;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Shop {
@@ -28,6 +32,12 @@ public class Shop {
 	
 	private int log;
 	private int sale;
+	
+	private FileWriter fw;
+	private FileReader fr;
+	private BufferedReader br;
+	private String fileName = "mega.txt";
+	private File file = new File(fileName);
 	
 	private boolean isEnd;
 	
@@ -338,6 +348,67 @@ public class Shop {
 		System.out.printf("총 매출액: %d원\n", sale);
 	}
 	
+	// save
+	private void save() {
+		String data = createData();
+		
+		try {
+			fw = new FileWriter(file);
+			
+			fw.write(data);
+			
+			fw.close();
+			System.out.println("파일 저장 성공");
+		} catch (Exception e) {
+			System.out.println("파일 저장 실패");
+		}
+	}
+	
+	// createData
+	private String createData() {
+		/*
+		 * 아이템/가격
+		 * id/pw/아이템/개수
+		 * id/pw
+		 * 총 매출
+		 */
+		String data = "";
+		
+		// item
+		for(int i = 0; i < itemManager.size(); i ++) {
+			Item item = itemManager.getItem(i);
+			String name = item.getName();
+			int price = item.getPrice();
+			data += name + "/" + price;
+			
+			if(i < itemManager.size()-1) {
+				data += "/";
+			}
+		}
+		data += "\n";
+		
+		// user
+		for(int i = 0; i < userManager.size(); i ++) {
+			User user = userManager.getUser(i);
+			String id = user.getId();
+			String pw = user.getPw();
+			data += id + "/" + pw;
+			
+			Cart cart = user.getCart();
+			if(cart.cartSize() > 0) {
+				for(int j = 0; j < cart.cartSize(); j ++) {
+					data += "/";
+					String name = cart.getCart(j).getName();
+					int price = cart.getCart(j).getPrice();
+					data += name + "/" + price;
+				}
+			}
+			data += "\n";
+		}
+		data += sale;
+		return data;
+	}
+	
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
@@ -360,7 +431,7 @@ public class Shop {
 	
 	private void end() {
 		isEnd = true;
-//		save();
+		save();
 	}
 	
 	private boolean isRun() {
