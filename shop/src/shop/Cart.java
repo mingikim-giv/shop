@@ -4,22 +4,72 @@ import java.util.ArrayList;
 
 public class Cart {
 	private ArrayList<Item> list;
-	private String id;
-	
-	public Cart(String id) {
-		this.id = id;
+	private ItemManager itemManager = ItemManager.getInstance();
+	public Cart() {
 		list = new ArrayList<>();
 	}
 	
-	public String getId() {
-		return this.id;
+	// searchItemName
+	public int searchItemName(String name) {
+		for(int i = 0; i < list.size(); i ++) {
+			Item item = list.get(i);
+			if(item.getName().equals(name)) {
+				return i;
+			}
+		}
+		return -1;
 	}
-	
-	public ArrayList<Item> getList() {
-		return this.list;
+	// printCart
+	public void printCart() {
+		if(list.size() == 0) {
+			System.err.println("장바구니가 비었습니다.");
+			return;
+		}
+		for(int i = 0; i < list.size(); i ++) {
+			Item item = list.get(i);
+			System.out.printf("%d) %s(%s개)\n", i+1, item.getName(), item.getPrice()); 
+		}
+		int total = total();
+		System.out.printf("총 금액: %d원\n", total);
 	}
-	
+	// total
+	public int total() {
+		int total = 0;
+		
+		for(int i = 0; i < list.size(); i ++) {
+			Item basket = list.get(i);
+			for(int j = 0; j < itemManager.size(); i ++) {
+				Item item = itemManager.getItem(j);
+				if(basket.getName().equals(item.getName())) {
+					total += item.getPrice()*basket.getPrice();
+				}
+			}
+		}
+		return total;
+	}
+	// C.
 	public void addItem(Item item) {
-		this.list.add(item);
+		list.add(item);
+	}
+	// R.
+	public Item getItem(int idx) {
+		Item item = list.get(idx);
+		return item.clone();
+	}
+	// U.
+	public Item setItem(int idx, Item item) {
+		return list.set(idx, item);
+	}
+	// D.
+	public void removeCart(int idx) {
+		if(idx < 0 || idx >= list.size()) {
+			System.err.println("유효하지 않은 범위입니다.");
+			return;
+		}
+		list.remove(idx);
+	}
+	// size
+	public int cartSize() {
+		return list.size();
 	}
 }
