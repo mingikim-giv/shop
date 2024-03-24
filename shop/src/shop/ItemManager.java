@@ -44,6 +44,7 @@ public class ItemManager {
 		}
 		return false;
 	}
+	
 	// printItem
 	public void printItem() {
 		for(int i = 0; i < list.size(); i ++) {
@@ -64,10 +65,10 @@ public class ItemManager {
 	// R.
 	public Item getItem(int idx) {
 		Item item = list.get(idx);
-		return item.clone();
+		return item;
 	}
 	// U.
-	public Item updateItem(int idx, Item item) {
+	public Item setItem(int idx, Item item) {
 		return list.set(idx, item);
 	}
 	// D.
