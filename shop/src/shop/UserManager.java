@@ -57,4 +57,8 @@ public class UserManager {
 		}
 		list.remove(idx);
 	}
+	
+	public int size() {
+		return list.size();
+	}
 }
