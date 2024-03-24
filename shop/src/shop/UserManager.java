@@ -45,10 +45,6 @@ public class UserManager {
 		User user = list.get(idx);
 		return user;
 	}
-	public Cart getCart(int idx) {
-		User user = list.get(idx);
-		return user.getCart();
-	}
 	// U.
 	public User setUser(int idx, User user) {
 		return list.set(idx, user);
