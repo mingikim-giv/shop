@@ -118,8 +118,8 @@ public class Shop {
 		
 		String pw = inputString("PW");
 		if(userManager.getUser(log).getPw().equals(pw)) {
-			System.out.println("회원 탈퇴 완료");
 			log = -1;
+			System.out.println("회원 탈퇴 완료");
 		}
 	}
 	// login
@@ -148,7 +148,7 @@ public class Shop {
 	
 	// shop
 	private void shop() {
-		printItem();
+		itemManager.printItem();
 		int number = inputNumber("아이템 번호")-1;
 		
 		if(number < 0 || number >= itemManager.size()) {
@@ -156,9 +156,10 @@ public class Shop {
 			return;
 		}
 		
-		int itemNum = inputNumber("아이템 수량");
 		Item item = itemManager.getItem(number);
-		userManager.addItem(log, item);
+		User user = userManager.getUser(log);
+		
+		user.addItem(item);
 		System.out.println("쇼핑 완료");
 	}
 	
@@ -268,7 +269,7 @@ public class Shop {
 	
 	// viewSale
 	private void viewSale() {
-		System.out.printf("총 매출액: %d원", sale);
+		System.out.printf("총 매출액: %d원\n", sale);
 	}
 	// input
 	private int inputNumber(String message) {
