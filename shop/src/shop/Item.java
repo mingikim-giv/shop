@@ -26,6 +26,10 @@ public class Item {
 		return this.cnt;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public void setPrice(int price) {
 		this.price = price;
 	}
