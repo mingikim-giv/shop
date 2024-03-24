@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Cart {
 	private ArrayList<Item> list;
-	private ItemManager itemManager = ItemManager.getInstance();
+	private ItemManager item = ItemManager.getInstance();
+	
 	public Cart() {
 		list = new ArrayList<>();
 	}
@@ -27,21 +28,18 @@ public class Cart {
 		}
 		for(int i = 0; i < list.size(); i ++) {
 			Item item = list.get(i);
-			System.out.printf("%d) %s(%s개)\n", i+1, item.getName(), item.getCnt()); 
+			System.out.printf("%d)%s(%s개)\n", i+1, item.getName(), item.getCnt()); 
 		}
-		int total = total();
-		System.out.printf("총 금액: %d원\n", total);
 	}
 	// total
 	public int total() {
 		int total = 0;
-		
 		for(int i = 0; i < list.size(); i ++) {
 			Item basket = list.get(i);
-			for(int j = 0; j < itemManager.size(); i ++) {
-				Item item = itemManager.getItem(j);
-				if(basket.getName().equals(item.getName())) {
-					total += item.getPrice()*basket.getCnt();
+			for(int j = 0; j < item.size(); j ++) {
+				Item info = item.getItem(j);
+				if(basket.getName().equals(info.getName())) {
+					total += info.getPrice()*basket.getCnt();
 				}
 			}
 		}
@@ -59,26 +57,27 @@ public class Cart {
 			list.add(item);
 			return;
 		}
+		
 		int piece = list.get(idx).getCnt();
-		list.get(idx).setCnt(cnt+piece);
+		list.get(idx).setCnt(piece+cnt);
 		return;
 	}
 	// R.
-	public Item getItem(int idx) {
+	public Item getCart(int idx) {
 		Item item = list.get(idx);
-		return item.clone();
+		return item;
 	}
 	// U.
-	public void setCart(String name, int price) {
+	public void setCart(String name, int cnt) {
 		int idx = searchItemName(name);
 		
 		if(idx < 0 || idx >= list.size()) {
 			System.err.println("존재하지 않는 상품입니다.");
 			return;
 		}
-		list.get(idx).setPrice(price);
+		list.get(idx).setCnt(cnt);
 	}
-	// R.
+	// D.
 	public void removeItem(String name) {
 		int idx = searchItemName(name);
 		
@@ -87,6 +86,9 @@ public class Cart {
 			return;
 		}
 		list.remove(idx);
+	}
+	public void removeCart() {
+		list.clear();
 	}
 	// size
 	public int cartSize() {
