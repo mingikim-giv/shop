@@ -3,6 +3,11 @@ package shop;
 public class Item {
 	private String name;
 	private int price;
+	private int cnt;
+	
+	public Item() {
+		
+	}
 	
 	public Item(String name, int price) {
 		this.name = name;
@@ -17,8 +22,16 @@ public class Item {
 		return this.price;
 	}
 	
+	public int getCnt() {
+		return this.cnt;
+	}
+	
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	
 	public Item clone() {

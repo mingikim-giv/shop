@@ -3,7 +3,7 @@ package shop;
 import java.util.ArrayList;
 
 public class ItemManager {
-	private static ArrayList<Item> list;
+	private  ArrayList<Item> list;
 	private static ItemManager instance = new ItemManager();
 	
 	public ItemManager() {
@@ -15,32 +15,51 @@ public class ItemManager {
 	}
 	
 	// searchItem
-	public boolean searchItem(String name) {
+	public int searchItem(String name) {
 		for(int i = 0; i < list.size(); i ++) {
 			Item item = list.get(i);
 			if(item.getName().equals(name)) {
-				return true;
+				return i;
 			}
+		}
+		return -1;
+	}
+	
+	// findItem
+	public Item findItem(String name) {
+		for(int i = 0; i < list.size(); i ++) {
+			Item item = list.get(i);
+			if(item.getName().equals(name)) {
+				return item;
+			}
+		}
+		return new Item();
+	}
+	
+	// isDuplItem
+	public boolean isDuplItem(String name) {
+		Item item = findItem(name);
+		if(item.getName() == null) {
+			return true;
 		}
 		return false;
 	}
-	
 	// printItem
 	public void printItem() {
 		for(int i = 0; i < list.size(); i ++) {
 			Item item = list.get(i);
-			System.out.printf("%s: %d원\n", item.getName(), item.getPrice());
+			System.out.printf("%d)%s\n", i+1, item);
 		}
 	}
 	
 	// C.
-	public void addItem(String name, int price) {
-		if(searchItem(name)) {
-			System.err.println("중복된 아이템 이름입니다.");
-			return;
+	public Item addItem(String name, int price) {
+		if(isDuplItem(name)) {
+			Item item = new Item(name, price);
+			list.add(item);
+			return item;
 		}
-		Item item = new Item(name, price);
-		list.add(item);
+		return new Item();
 	}
 	// R.
 	public Item getItem(int idx) {

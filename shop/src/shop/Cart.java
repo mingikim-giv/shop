@@ -27,7 +27,7 @@ public class Cart {
 		}
 		for(int i = 0; i < list.size(); i ++) {
 			Item item = list.get(i);
-			System.out.printf("%d) %s(%s원)\n", i+1, item.getName(), item.getPrice()); 
+			System.out.printf("%d) %s(%s개)\n", i+1, item.getName(), item.getCnt()); 
 		}
 		int total = total();
 		System.out.printf("총 금액: %d원\n", total);
@@ -41,7 +41,7 @@ public class Cart {
 			for(int j = 0; j < itemManager.size(); i ++) {
 				Item item = itemManager.getItem(j);
 				if(basket.getName().equals(item.getName())) {
-					total += item.getPrice()*basket.getPrice();
+					total += item.getPrice()*basket.getCnt();
 				}
 			}
 		}

@@ -49,10 +49,14 @@ public class UserManager {
 	// R.
 	public User getUser(int idx) {
 		User user = list.get(idx);
-		return user.clone();
+		return user;
+	}
+	public Cart getCart(int idx) {
+		User user = list.get(idx);
+		return user.getCart();
 	}
 	// U.
-	public User updateUser(int idx, User user) {
+	public User setUser(int idx, User user) {
 		return list.set(idx, user);
 	}
 	// D.
