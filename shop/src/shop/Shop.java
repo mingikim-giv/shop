@@ -18,7 +18,7 @@ public class Shop {
 	private final int SHOP = 5;
 	private final int MY_PAGE = 6;
 	private final int ADMIN = 7;
-	private final int END = 8;
+	private final int FILE = 8;
 	
 	private final int MYBASKET = 1;
 	private final int DELETE = 2;
@@ -30,6 +30,9 @@ public class Shop {
 	private final int ITEM_CHANGE = 3;
 	private final int SALES_VIEW = 4;
 	
+	private final int SAVE = 1;
+	private final int LOAD = 2;
+	
 	private int log;
 	private int sale;
 	
@@ -39,14 +42,12 @@ public class Shop {
 	private String fileName = "mega.txt";
 	private File file = new File(fileName);
 	
-	private boolean isEnd;
 	
 	private String brand;
 	
 	public Shop(String brand) {
 		this.brand = brand;
 		log = -1;
-		load();
 	}
 	
 	// print
@@ -59,7 +60,7 @@ public class Shop {
 		System.out.println("[5]쇼핑");
 		System.out.println("[6]마이 페이지");
 		System.out.println("[7]관리자 모드");
-		System.out.println("[8]종료");
+		System.out.println("[8]파일");
 	}
 	
 	// runMenu
@@ -87,8 +88,9 @@ public class Shop {
 			adminSubMenu();
 			adminRunMenu(inputNumber("메뉴"));
 		}
-		else if(sel == END) {
-			end();
+		else if(sel == FILE) {
+			fileSubMenu();
+			fileRunMenu(inputNumber("메뉴"));
 		}
 	}
 	
@@ -349,6 +351,21 @@ public class Shop {
 		System.out.printf("총 매출액: %d원\n", sale);
 	}
 	
+	// fileSubMenu
+	private void fileSubMenu() {
+		System.out.println("[1]파일 저장");
+		System.out.println("[2]파일 로드");
+	}
+	
+	// fileRunMenu
+	private void fileRunMenu(int sel) {
+		if(sel == SAVE) {
+			save();
+		}
+		else if(sel == LOAD) {
+			load();
+		}
+	}
 	// save
 	private void save() {
 		String data = createData();
@@ -485,17 +502,8 @@ public class Shop {
 		return scan.next();
 	}
 	
-	private void end() {
-		isEnd = true;
-		save();
-	}
-	
-	private boolean isRun() {
-		return !isEnd;
-	}
-	
 	public void run() {
-		while(isRun()) {
+		while(true) {
 			userManager.printUserId();	// 검수용
 			print();
 			runMenu(inputNumber("메뉴 선택"));
