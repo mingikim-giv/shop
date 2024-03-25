@@ -265,9 +265,19 @@ public class Shop {
 			System.err.println("금액이 부족합니다.");
 			return;
 		}
+		
+		recipt(money, total);
 		sale += total;
 		user.getCart().removeCart();
 		System.out.println("결제 완료");
+	}
+	
+	// recipt
+	private void recipt(int money, int total) {
+		System.out.println("===영수증===");
+		System.out.printf("소계: %d원\n", money);
+		System.out.printf("총계: %d원\n", total);
+		System.out.printf("거스름돈: %d원\n", money-total);
 	}
 	
 	// adminSubMenu
